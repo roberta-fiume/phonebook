@@ -2,6 +2,7 @@
   <div>
     <section>
       <SearchBox />
+        <img v-if="this.$store.state.loading" :src="spinner" />
       <Results />
     </section>
   </div>
@@ -19,6 +20,12 @@ export default {
   components: {
     Results,
     SearchBox,
+  },
+
+  data() {
+    return {
+      spinner: require('/public/loading.gif'),
+    }
   },
   mounted() {
     // var term = this.$route.params?.term;

@@ -8,7 +8,7 @@
       placeholder="Search for contacts"
       value=""
     />
-    <button  @click="getResults">Search</button>
+    <button type="button" @click="getResults">Search</button>
   </form>
 </template>
 

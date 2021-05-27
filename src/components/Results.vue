@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div v-if="this.$store.state.results.length > 0" class="results">
     <ol>
@@ -7,11 +8,20 @@
         }}</router-link>
       </li>
     </ol>
+    <div class="results">
+
+    </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable prettier/prettier */
 export default {
   name: "Results",
+  data() {
+    return {
+      spinner: require('/public/loading.gif'),
+    }
+  }
 };
 </script>
