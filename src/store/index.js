@@ -13,6 +13,7 @@ export default new Vuex.Store({
     searchTerm: "",
     results: [],
     loading: false,
+    errorStatus: false,
   },
   getters: {
     searchTermGetter: state => state.searchTerm,
@@ -34,9 +35,9 @@ export default new Vuex.Store({
         this.state.results = response.data;
       })
       .catch(error => {
-        alert("Ops, something went wrong!");
+        this.state.errorStatus = true;
       }).finally(() => {
-        this.state.loading =  false
+        this.state.loading =  false;
     });
     },
   },

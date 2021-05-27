@@ -1,17 +1,23 @@
 /* eslint-disable prettier/prettier */
 <template>
-  <div v-if="this.$store.state.results.length > 0" class="results">
-    <ol>
-      <li v-for="contact in this.$store.state.results" :key="contact.id">
-        <router-link :to="'/contact/' + contact.name">{{
-          contact.name
-        }}</router-link>
-      </li>
-    </ol>
-    <div class="results">
-
+  <div>
+    <div v-if="this.$store.state.results.length > 0" class="results">
+      <ol>
+        <li v-for="contact in this.$store.state.results" :key="contact.id">
+          <router-link :to="'/contact/' + contact.name">{{
+            contact.name
+          }}</router-link>
+        </li>
+      </ol>
+    </div>
+    <div v-else class="results">
+      {{ noContacts }}
+    </div>
+    <div v-if="this.$store.state.errorStatus" class="results">
+      {{ errorMessage }}
     </div>
   </div>
+
 </template>
 
 <script>
@@ -20,7 +26,8 @@ export default {
   name: "Results",
   data() {
     return {
-      spinner: require('/public/loading.gif'),
+      errorMessage: "Ops, something went wrong!",
+      noContacts: "No contacts available",
     }
   }
 };
