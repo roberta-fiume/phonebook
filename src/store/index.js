@@ -14,6 +14,7 @@ export default new Vuex.Store({
     results: [],
     loading: false,
     errorStatus: false,
+    wrapper: false,
   },
   getters: {
     searchTermGetter: state => state.searchTerm,
@@ -27,12 +28,13 @@ export default new Vuex.Store({
 
     getResults( { commit, dispatch} ) {
       let termValue = this.getters.searchTermGetter;
-      console.log("INPUT VALUE", termValue);
       let url = 'http://localhost:8080/contacts';
-      console.log("this is the url", url);
       this.state.loading = true;
+      commit('updateErrorStatus');
+      this.state.wrapper = false;
       axios.get(`${url}`, { params: { term: termValue } }).then(response => {
         this.state.results = response.data;
+        this.state.wrapper = true;
       })
       .catch(error => {
         this.state.errorStatus = true;
@@ -45,6 +47,12 @@ export default new Vuex.Store({
   mutations: {
     updateSearchValue(state, searchTerm) {
       state.searchTerm = searchTerm;
+    },
+
+    updateErrorStatus(state, errorStatus) {
+      if (state.errorStatus) {
+        state.errorStatus = false;
+      }
     },
   }
 

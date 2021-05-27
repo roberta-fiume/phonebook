@@ -26,7 +26,7 @@ export default {
   computed: {
     searchValue: {
       get() {
-          return this.searchTermGetter
+          return this.searchTermGetter;
       },
       set(value) {
           return this.updateSearchValue(value);
@@ -38,12 +38,6 @@ export default {
   methods: {
 
     ...mapActions(['updateSearchValue', 'getResults']),
-
-  
-    //  ...mapActions(['getResults']),
-    // updateResults: function () {
-    //   this.$store.state.results = getResults(this.$store.state.searchTerm);//make api call to api in store action and import action in here. Pass the searchTerm in action
-    // },
   },
 };
 </script>

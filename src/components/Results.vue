@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 <template>
   <div>
-    <div v-if="this.$store.state.results.length > 0" class="results">
+    <div v-if="results" class="results">
       <ol>
         <li v-for="contact in this.$store.state.results" :key="contact.id">
           <router-link :to="'/contact/' + contact.name">{{
@@ -10,10 +10,10 @@
         </li>
       </ol>
     </div>
-    <div v-else class="results">
+    <div v-else-if="this.$store.state.wrapper">
       {{ noContacts }}
     </div>
-    <div v-if="this.$store.state.errorStatus" class="results">
+    <div v-if="this.$store.state.errorStatus">
       {{ errorMessage }}
     </div>
   </div>
@@ -29,6 +29,15 @@ export default {
       errorMessage: "Ops, something went wrong!",
       noContacts: "No contacts available",
     }
+  },
+
+  computed: {
+    results() {
+      return this.$store.state.results.length > 0 && this.$store.state.wrapper;
+    },
+
+   
   }
+
 };
 </script>
