@@ -2,7 +2,7 @@
   <div>
     <section>
       <SearchBox />
-        <img v-if="this.$store.state.loading" :src="spinner" />
+        <img v-if="this.$store.state.loading" :src="spinner" class="image" />
       <Results />
     </section>
   </div>

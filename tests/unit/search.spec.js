@@ -3,6 +3,7 @@ import { shallowMount } from "@vue/test-utils";
 import Search from "@/views/Search.vue";
 import getResults from "../../src/api/getResults";
 
+
 describe("searchBox", () => {
   beforeEach(() => {
     getResults.mockClear();
@@ -65,23 +66,36 @@ describe("searchBox", () => {
   });
 
     
-  it('should test that the spinner does not exist yet', () => {
-    const wrapper = shallowMount(Search, {
-      mocks: {
-        $store: {
-          state: {
-            searchTerm: "",
-            loading: false,
+  describe('should display spinner when results are loading', () => {
+        const wrapper = shallowMount(Search, {
+          mocks: {
+            $store: {
+              state: {
+                searchTerm: "",
+                loading: false,
+              },
+
+              actions: {
+                getResults: jest.fn()
+              }
+            },
           },
-        },
-      },
-    });
-    let spinner = wrapper.find('img');
+        });
 
-    console.log("this is the image",spinner )
-    expect(spinner.exists()).toBe(false);
-  });
-
-  
-
+        it('should display a spinner when loading the results', async() => {
+            //GIVEN
+            let spinner = wrapper.findAll('.image');
+            expect(spinner.exists()).toBe(false);
+        
+            //WHEN
+            wrapper.find('button').trigger('click');
+      
+          
+            await Vue.nextTick();
+            expect(wrapper.vm.$store.actions.getResults).toHaveBeenCalledTimes(1);
+      
+            let spinnerImage = wrapper.findAll('.image');
+            expect(spinnerImage.exists()).toBe(true);
+        })
+    })            
 });
