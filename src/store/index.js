@@ -3,6 +3,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+
 Vue.use(Vuex);
 
 const axios = require('axios').default;
@@ -46,6 +47,8 @@ export default new Vuex.Store({
 
   mutations: {
     updateSearchValue(state, searchTerm) {
+      console.log("ACTION", searchTerm);
+    
       state.searchTerm = searchTerm;
     },
 

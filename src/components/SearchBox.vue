@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import getResults from "../api/getResults";
 
 /* eslint-disable no-unused-vars*/ 
 /* eslint-disable prettier/prettier */
@@ -22,6 +21,7 @@ import { mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "SearchBox",
+
 
   computed: {
     searchValue: {

@@ -1,7 +1,7 @@
+/* eslint-disable */
 import { shallowMount } from "@vue/test-utils";
 import Search from "@/views/Search.vue";
 import getResults from "../../src/api/getResults";
-jest.mock("../../src/api/getResults");
 
 describe("searchBox", () => {
   beforeEach(() => {
@@ -13,6 +13,8 @@ describe("searchBox", () => {
       },
     ]);
   });
+
+
 
   it("It updates term and results if a search term is in the route", () => {
     const $route = {
@@ -61,4 +63,25 @@ describe("searchBox", () => {
     expect(wrapper.vm.$store.state.searchTerm).toBe("");
     expect(wrapper.vm.$store.state.results).toStrictEqual([]);
   });
+
+    
+  it('should test that the spinner does not exist yet', () => {
+    const wrapper = shallowMount(Search, {
+      mocks: {
+        $store: {
+          state: {
+            searchTerm: "",
+            loading: false,
+          },
+        },
+      },
+    });
+    let spinner = wrapper.find('img');
+
+    console.log("this is the image",spinner )
+    expect(spinner.exists()).toBe(false);
+  });
+
+  
+
 });
